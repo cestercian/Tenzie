@@ -37,6 +37,7 @@ export default function () {
     <>
       <main>
         <div className={"dice-container"}>{diceElements}</div>
+          <p></p><p></p>
         <button className={"roll-dice"} onClick={inCount}>
           Roll Dice
         </button>
