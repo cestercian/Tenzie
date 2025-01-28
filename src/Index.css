@@ -6,7 +6,7 @@ body {
   margin: 0;
   background-color: #0B2434;
   padding: 20px;
-  height: 100vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,12 +16,12 @@ body {
 div#root {
   height: 100%;
   width: 100%;
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 550px;
+  max-width: 550px;
 }
 
 main {
-  background-color: #F5F5F5;
+  background-color: gray;
   height: 100%;
   border-radius: 5px;
 
