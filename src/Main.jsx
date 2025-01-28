@@ -1,40 +1,31 @@
+import {useState,useEffect } from "react";
 import Die from "./Die.jsx";
 
 export default function (){
+
+    const [number,setNumbers]=useState([])
+
+    useEffect(()=>{
+        let numbersArr = []
+        function generateNO(){
+            for(let i=0;i<10;i++){
+                const randomNo = Math.ceil(Math.random()*6)
+                numbersArr.push(randomNo)
+            }
+            setNumbers(numbersArr)
+        }
+        generateNO()
+    },[])
+
+    const diceElements = number.map((num)=>
+        <Die number={num}/>
+    )
+
     return(
         <>
             <main>
                 <div className={"dice-container"}>
-                    <Die
-                        number={5}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={6}
-                    />
-                    <Die
-                        number={7}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={9}
-                    />
-                    <Die
-                        number={3}
-                    />
-                    <Die
-                        number={4}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={2}
-                    />
+                    {diceElements}
                 </div>
             </main>
         </>
