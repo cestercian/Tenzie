@@ -6,10 +6,35 @@ function App() {
   return (
     <>
         <main>
-            <h1>fhd</h1>
             <Die
-                number={"hello!"}
+                number={1}
             />
+            <Die
+                number={1}
+            />
+            <Die
+                number={1}
+            />
+            <Die
+            number={1}
+            />
+            <Die
+                number={1}
+            />
+            <Die
+                number={1}
+            />
+            <Die
+                number={1}
+            />
+            <Die
+                number={1}
+            />
+            <Die
+                number={1}
+            />
+
+
         </main>
     </>
   )
