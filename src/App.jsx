@@ -6,34 +6,34 @@ function App() {
         <main>
             <div className={"dice-container"}>
                 <Die
-                    number={1}
+                    number={5}
                 />
                 <Die
                     number={1}
                 />
                 <Die
-                    number={1}
+                    number={6}
+                />
+                <Die
+                    number={7}
                 />
                 <Die
                     number={1}
                 />
                 <Die
-                    number={1}
+                    number={9}
+                />
+                <Die
+                    number={3}
+                />
+                <Die
+                    number={4}
                 />
                 <Die
                     number={1}
                 />
                 <Die
-                    number={1}
-                />
-                <Die
-                    number={1}
-                />
-                <Die
-                    number={1}
-                />
-                <Die
-                    number={1}
+                    number={2}
                 />
             </div>
         </main>
