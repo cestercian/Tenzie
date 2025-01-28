@@ -3,58 +3,29 @@ import Die from "./Die.jsx";
 
 export default function (){
 
-    const [numbers,setNumbers] = useState([])
-
-    let numbersArr = []
+    const [number,setNumbers]=useState([])
 
     useEffect(()=>{
-        for(let i=0;i<10;i++){
-            const randomNo = Math.ceil(Math.random()*6)
-            numbersArr.push(randomNo)
+        let numbersArr = []
+        function generateNO(){
+            for(let i=0;i<10;i++){
+                const randomNo = Math.ceil(Math.random()*6)
+                numbersArr.push(randomNo)
+            }
+            setNumbers(numbersArr)
         }
+        generateNO()
     },[])
 
-    numbersArr.map(()=>{
-        setNumbers(()=>{
-            numbers.push(numbersArr)
-        })
-    })
+    const diceElements = number.map((num)=>
+        <Die number={num}/>
+    )
 
     return(
         <>
             <main>
-
                 <div className={"dice-container"}>
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
-                    <Die
-                        number={1}
-                    />
+                    {diceElements}
                 </div>
             </main>
         </>
