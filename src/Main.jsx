@@ -1,39 +1,44 @@
 import Die from "./Die.jsx";
 
 export default function (){
+
+    const randomNo = Math.floor(Math.random()*6)
+
+
     return(
         <>
             <main>
+
                 <div className={"dice-container"}>
                     <Die
-                        number={5}
+                        number={randomNo}
                     />
                     <Die
-                        number={1}
+                        number={randomNo}
                     />
                     <Die
-                        number={6}
+                        number={randomNo}
                     />
                     <Die
-                        number={7}
+                        number={randomNo}
                     />
                     <Die
-                        number={1}
+                        number={randomNo}
                     />
                     <Die
-                        number={9}
+                        number={randomNo}
                     />
                     <Die
-                        number={3}
+                        number={randomNo}
                     />
                     <Die
-                        number={4}
+                        number={randomNo}
                     />
                     <Die
-                        number={1}
+                        number={randomNo}
                     />
                     <Die
-                        number={2}
+                        number={randomNo}
                     />
                 </div>
             </main>
