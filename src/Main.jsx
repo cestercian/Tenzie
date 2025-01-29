@@ -20,7 +20,7 @@ export default function () {
         const randomNo = Math.ceil(Math.random() * 6);
         numbersArr.push({
           value: randomNo,
-          isHeld: false,
+          isHeld: true,
           id: nanoid(),
         });
       }
@@ -30,7 +30,7 @@ export default function () {
   }, [count]);
 
   const diceElements = numbers.map((num) => (
-    <Die number={num.value} key={num.id} />
+    <Die number={num.value} key={num.id} isHeld={num.isHeld}/>
   ));
 
   return (
