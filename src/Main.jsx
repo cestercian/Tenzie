@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import Die from "./Die.jsx";
 import { nanoid } from "nanoid";
 import { useWindowSize } from 'react-use'
@@ -8,10 +8,17 @@ export default function () {
   //dice numbers array which is displayed
   const [numbers, setNumbers] = useState([]);
   const [count,setCount] = useState(0)
+  const buttonRef = useRef(null)
 
   const gameWon =
       numbers.every(item => item.value === numbers[0].value) &&
       numbers.every(item => item.isHeld === true)
+
+  useEffect(() => {
+    if (gameWon) {
+      buttonRef.current.focus()
+    }
+  }, [gameWon])
 
   function inCount(){
     if(gameWon){
@@ -74,7 +81,7 @@ export default function () {
           Click each die to freeze it at its current value between rolls.</p>
         <div className={"dice-container"}>{diceElements}</div>
           <p></p><p></p>
-        <button className={"roll-dice"} onClick={inCount}>
+        <button ref={buttonRef} className={"roll-dice"} onClick={inCount}>
           {gameWon?"New Game":"Roll"}
         </button>
       </main>
