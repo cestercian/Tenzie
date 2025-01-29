@@ -3,6 +3,8 @@ import Die from "./Die.jsx";
 import { nanoid } from "nanoid";
 
 export default function () {
+
+  //dice numbers array which is displayed
   const [numbers, setNumbers] = useState([]);
 
   let [count, setCount] = useState(0);
@@ -13,6 +15,7 @@ export default function () {
         )
     }
 
+    //to generate random number in dice array
   useEffect(() => {
     let numbersArr = [];
     function generateNO() {
@@ -20,7 +23,7 @@ export default function () {
         const randomNo = Math.ceil(Math.random() * 6);
         numbersArr.push({
           value: randomNo,
-          isHeld: true,
+          isHeld: false,
           id: nanoid(),
         });
       }
@@ -29,8 +32,23 @@ export default function () {
     generateNO();
   }, [count]);
 
+    function holdDice(id){
+      setNumbers(prevState =>
+          prevState.map((die)=>
+              die.id === id ?
+                  {...die,isHeld:true}:
+                  die
+          )
+      )
+    }
+
+    // arrow function to create dice elements
   const diceElements = numbers.map((num) => (
-    <Die number={num.value} key={num.id} isHeld={num.isHeld}/>
+    <Die
+        number={num.value}
+        key={num.id}
+        isHeld={num.isHeld}
+        hold = {()=>holdDice(num.id)}/>
   ));
 
   return (
