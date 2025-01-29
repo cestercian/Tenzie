@@ -7,12 +7,16 @@ import Confetti from 'react-confetti'
 export default function () {
   //dice numbers array which is displayed
   const [numbers, setNumbers] = useState([]);
+  const [count,setCount] = useState(0)
 
   const gameWon =
       numbers.every(item => item.value === numbers[0].value) &&
       numbers.every(item => item.isHeld === true)
 
   function inCount(){
+    if(gameWon){
+      setCount(prevState => prevState+1)
+    }
      setNumbers(prevState =>
          prevState.map(dice =>
              dice.isHeld === false ?
@@ -37,7 +41,7 @@ export default function () {
       setNumbers(numbersArr);
     }
     generateNO();
-  }, []);
+  }, [count]);
 
     function holdDice(id){
       setNumbers(prevState =>
@@ -60,10 +64,10 @@ export default function () {
   const { width, height } = useWindowSize()
   return (
     <>
-      <Confetti
+      {gameWon && <Confetti
           width={width}
           height={height}
-      />
+      />}
       <main>
         <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same.
