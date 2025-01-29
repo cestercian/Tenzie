@@ -1,18 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import Die from "./Die.jsx";
 import { nanoid } from "nanoid";
+import { useWindowSize } from 'react-use'
+import Confetti from 'react-confetti'
 
 export default function () {
+  //dice numbers array which is displayed
   const [numbers, setNumbers] = useState([]);
+  const [count,setCount] = useState(0)
+  const buttonRef = useRef(null)
 
-  let [count, setCount] = useState(0);
+  const gameWon =
+      numbers.every(item => item.value === numbers[0].value) &&
+      numbers.every(item => item.isHeld === true)
 
-    function inCount(){
-        setCount((prevState)=>
-            prevState+1
-        )
+  useEffect(() => {
+    if (gameWon) {
+      buttonRef.current.focus()
     }
+  }, [gameWon])
 
+  function inCount(){
+    if(gameWon){
+      setCount(prevState => prevState+1)
+    }
+     setNumbers(prevState =>
+         prevState.map(dice =>
+             dice.isHeld === false ?
+                 {...dice, value : Math.ceil(Math.random() * 6)}:
+                 dice
+        )
+    )
+  }
+
+    //to generate random number in dice array
   useEffect(() => {
     let numbersArr = [];
     function generateNO() {
@@ -20,7 +41,7 @@ export default function () {
         const randomNo = Math.ceil(Math.random() * 6);
         numbersArr.push({
           value: randomNo,
-          isHeld: true,
+          isHeld: false,
           id: nanoid(),
         });
       }
@@ -29,17 +50,39 @@ export default function () {
     generateNO();
   }, [count]);
 
-  const diceElements = numbers.map((num) => (
-    <Die number={num.value} key={num.id} isHeld={num.isHeld}/>
-  ));
+    function holdDice(id){
+      setNumbers(prevState =>
+          prevState.map((die)=>
+              die.id === id ?
+                  {...die,isHeld:!die.isHeld}:
+                  die
+          )
+      )
+    }
 
+    // arrow function to create dice elements
+  const diceElements = numbers.map((num) => (
+    <Die
+        number={num.value}
+        key={num.id}
+        isHeld={num.isHeld}
+        hold = {()=>holdDice(num.id)}/>
+  ));
+  const { width, height } = useWindowSize()
   return (
     <>
+      {gameWon && <Confetti
+          width={width}
+          height={height}
+      />}
       <main>
+        <h1 className="title">Tenzies</h1>
+        <p className="instructions">Roll until all dice are the same.
+          Click each die to freeze it at its current value between rolls.</p>
         <div className={"dice-container"}>{diceElements}</div>
           <p></p><p></p>
-        <button className={"roll-dice"} onClick={inCount}>
-          Roll Dice
+        <button ref={buttonRef} className={"roll-dice"} onClick={inCount}>
+          {gameWon?"New Game":"Roll"}
         </button>
       </main>
     </>
