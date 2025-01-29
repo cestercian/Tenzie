@@ -99,8 +99,10 @@ button:focus {
 
 .roll-dice {
     height: 3.125rem;
-    width: 6.25rem;
+    width: auto;
+    padding: 6px 15px;
     border: none;
+    white-space: nowrap;
     border-radius: 0.375rem;
     background-color: #5035FF;
     color: white;

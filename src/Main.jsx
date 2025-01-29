@@ -7,6 +7,9 @@ export default function () {
   //dice numbers array which is displayed
   const [numbers, setNumbers] = useState([]);
 
+  const gameWon =
+      numbers.every(item => item.value === numbers[0].value) &&
+      numbers.every(item => item.isHeld === true)
 
   function inCount(){
      setNumbers(prevState =>
@@ -39,21 +42,11 @@ export default function () {
       setNumbers(prevState =>
           prevState.map((die)=>
               die.id === id ?
-                  {...die,isHeld:true}:
+                  {...die,isHeld:!die.isHeld}:
                   die
           )
       )
     }
-
-  /**
-   * Challenge: Update the `rollDice` function to not just roll
-   * all new dice, but instead to look through the existing dice
-   * to NOT role any that are being `held`.
-   *
-   * Hint: this will look relatively similiar to the `hold`
-   * function below. When we're "rolling" a die, we're really
-   * just updating the `value` property of the die object.
-   */
 
 
 
@@ -75,7 +68,7 @@ export default function () {
         <div className={"dice-container"}>{diceElements}</div>
           <p></p><p></p>
         <button className={"roll-dice"} onClick={inCount}>
-          Roll Dice
+          {gameWon?"New Game":"Roll"}
         </button>
       </main>
     </>
