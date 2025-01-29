@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "install": "^0.13.0",
     "nanoid": "^5.0.9",
+    "npm": "^11.1.0",
     "react": "^19.1.0-canary-9eabb373-20250124",
-    "react-dom": "^19.1.0-canary-9eabb373-20250124"
+    "react-confetti": "^6.2.2",
+    "react-dom": "^19.1.0-canary-9eabb373-20250124",
+    "react-use": "^17.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

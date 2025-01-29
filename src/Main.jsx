@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Die from "./Die.jsx";
 import { nanoid } from "nanoid";
+import { useWindowSize } from 'react-use'
+import Confetti from 'react-confetti'
 
 export default function () {
-
   //dice numbers array which is displayed
   const [numbers, setNumbers] = useState([]);
 
@@ -48,8 +49,6 @@ export default function () {
       )
     }
 
-
-
     // arrow function to create dice elements
   const diceElements = numbers.map((num) => (
     <Die
@@ -58,9 +57,13 @@ export default function () {
         isHeld={num.isHeld}
         hold = {()=>holdDice(num.id)}/>
   ));
-
+  const { width, height } = useWindowSize()
   return (
     <>
+      <Confetti
+          width={width}
+          height={height}
+      />
       <main>
         <h1 className="title">Tenzies</h1>
         <p className="instructions">Roll until all dice are the same.
