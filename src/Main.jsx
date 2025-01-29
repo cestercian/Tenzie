@@ -7,13 +7,16 @@ export default function () {
   //dice numbers array which is displayed
   const [numbers, setNumbers] = useState([]);
 
-  let [count, setCount] = useState(0);
 
-    function inCount(){
-        setCount((prevState)=>
-            prevState+1
+  function inCount(){
+     setNumbers(prevState =>
+         prevState.map(dice =>
+             dice.isHeld === false ?
+                 {...dice, value : Math.ceil(Math.random() * 6)}:
+                 dice
         )
-    }
+    )
+  }
 
     //to generate random number in dice array
   useEffect(() => {
@@ -30,7 +33,7 @@ export default function () {
       setNumbers(numbersArr);
     }
     generateNO();
-  }, [count]);
+  }, []);
 
     function holdDice(id){
       setNumbers(prevState =>
@@ -41,6 +44,18 @@ export default function () {
           )
       )
     }
+
+  /**
+   * Challenge: Update the `rollDice` function to not just roll
+   * all new dice, but instead to look through the existing dice
+   * to NOT role any that are being `held`.
+   *
+   * Hint: this will look relatively similiar to the `hold`
+   * function below. When we're "rolling" a die, we're really
+   * just updating the `value` property of the die object.
+   */
+
+
 
     // arrow function to create dice elements
   const diceElements = numbers.map((num) => (
