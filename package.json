@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "nanoid": "^5.0.9",
     "react": "^19.1.0-canary-9eabb373-20250124",
     "react-dom": "^19.1.0-canary-9eabb373-20250124"
   },

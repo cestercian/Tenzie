@@ -1,33 +1,47 @@
-import {useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Die from "./Die.jsx";
+import { nanoid } from "nanoid";
 
-export default function (){
+export default function () {
+  const [numbers, setNumbers] = useState([]);
 
-    const [number,setNumbers]=useState([])
+  let [count, setCount] = useState(0);
 
-    useEffect(()=>{
-        let numbersArr = []
-        function generateNO(){
-            for(let i=0;i<10;i++){
-                const randomNo = Math.ceil(Math.random()*6)
-                numbersArr.push(randomNo)
-            }
-            setNumbers(numbersArr)
-        }
-        generateNO()
-    },[])
+    function inCount(){
+        setCount((prevState)=>
+            prevState+1
+        )
+    }
 
-    const diceElements = number.map((num)=>
-        <Die number={num}/>
-    )
+  useEffect(() => {
+    let numbersArr = [];
+    function generateNO() {
+      for (let i = 0; i < 10; i++) {
+        const randomNo = Math.ceil(Math.random() * 6);
+        numbersArr.push({
+          value: randomNo,
+          isHeld: true,
+          id: nanoid(),
+        });
+      }
+      setNumbers(numbersArr);
+    }
+    generateNO();
+  }, [count]);
 
-    return(
-        <>
-            <main>
-                <div className={"dice-container"}>
-                    {diceElements}
-                </div>
-            </main>
-        </>
-    )
+  const diceElements = numbers.map((num) => (
+    <Die number={num.value} key={num.id} isHeld={num.isHeld}/>
+  ));
+
+  return (
+    <>
+      <main>
+        <div className={"dice-container"}>{diceElements}</div>
+          <p></p><p></p>
+        <button className={"roll-dice"} onClick={inCount}>
+          Roll Dice
+        </button>
+      </main>
+    </>
+  );
 }

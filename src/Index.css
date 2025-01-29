@@ -17,8 +17,8 @@ body {
 div#root {
   height: 100%;
   width: 100%;
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 500px;
+  max-width: 500px;
 }
 
 main {
@@ -48,4 +48,14 @@ main {
   font-size: 1.75rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+button.roll-dice {
+  height: 50px;
+  width: 100px;
+  border: none;
+  border-radius: 6px;
+  background-color: #5035FF;
+  color: white;
+  font-size: 1.2rem;
 }
